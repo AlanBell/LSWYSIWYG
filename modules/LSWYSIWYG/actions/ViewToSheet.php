@@ -35,7 +35,7 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
       $fieldObj = Vtiger_Field::getInstance($webserviceField->getFieldId());
       //echo $fieldObj->label;
       $fields[]=$fieldObj;
-      $worksheet->setCellValueExplicitByColumnAndRow($col, $row, htmlspecialchars_decode(vtranslate($fieldObj->label,$selectedModule)), PHPExcel_Cell_DataType::TYPE_STRING);
+      $worksheet->setCellValueExplicitByColumnAndRow($col, $row, html_entity_decode(vtranslate($fieldObj->label,$selectedModule)), PHPExcel_Cell_DataType::TYPE_STRING);
       $col++;
     }
     $row++;
@@ -66,7 +66,7 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
             $worksheet->getStyleByColumnAndRow($col,$row)->getNumberFormat()->setFormatCode('DD/MM/YYYY HH:MM:SS');//format the date to the users preference
           break;
           default:
-            $worksheet->setCellValueExplicitByColumnAndRow($col, $row, htmlspecialchars_decode(strip_tags($value)), PHPExcel_Cell_DataType::TYPE_STRING);
+            $worksheet->setCellValueExplicitByColumnAndRow($col, $row, html_entity_decode(strip_tags($value)), PHPExcel_Cell_DataType::TYPE_STRING);
         }
         //echo strip_tags($value);
         $col++;
@@ -98,7 +98,7 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
 
     header('Content-Type: application/x-msexcel');
     header('Content-Length: '.@filesize($tempFileName));
-    $filename=$customView->get('viewname') . ".xls";
+    $filename=html_entity_decode($customView->get('viewname')) . ".xls";
     header('Content-disposition: attachment; filename="'.$filename.'"');
 
     $fp = fopen($tempFileName, 'rb');
