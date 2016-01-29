@@ -53,7 +53,7 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
         $value=$record->getDisplayValue($field->name);
         $uitype=$field->uitype;
         switch($uitype){
-          case 4://numbers
+          //numbers
           case 25:
           case 7:
           case 71:
