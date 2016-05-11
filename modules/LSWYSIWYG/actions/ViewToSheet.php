@@ -57,6 +57,8 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
           case 25:
           case 7:
           case 71:
+            //we don't want the display value as that might have commas, we want the raw value
+            $value=$record->getData()[$field->name];
             $worksheet->setCellvalueExplicitByColumnAndRow($col, $row, strip_tags($value), PHPExcel_Cell_DataType::TYPE_NUMERIC);
           break;
           case 6://datetimes
