@@ -92,7 +92,7 @@ class LSWYSIWYG_ViewToSheet_Action extends Vtiger_Mass_Action {
     $tempFileName = tempnam($rootDirectory.$tmpDir, 'xls');
     $workbookWriter = PHPExcel_IOFactory::createWriter($workbook, 'Excel5');
     $workbookWriter->save($tempFileName);
-
+    ob_end_clean();//close the output buffer in case there is anything putting additional text on the page
     if(isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], 'MSIE')) {
             header('Pragma: public');
             header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
